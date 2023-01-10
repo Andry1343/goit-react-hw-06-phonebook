@@ -1,20 +1,22 @@
+import { useDispatch } from 'react-redux';
+import { deleteContact } from 'components/redux/contactsSlice';
 import style from '../contactList/ContactList.module.css';
 
-export const ContactItem = ({ contact: { name, number, id }, onDelete }) => {
+export const ContactItem = ({ contact: { name, number, id } }) => {
+  const dispatch = useDispatch();
+  const handleDelete = () => dispatch(deleteContact(id));
   return (
     <>
       <p>
         {' '}
         <button
-          className={style.form_btn_del}
           type="button"
-          onClick={() => {
-            onDelete(id);
-          }}
+          className={style.form_btn_del}
+          onClick={handleDelete}
         >
           X
-        </button>{' '}
-        {name} : {number}{' '}
+        </button>
+        {name} : {number}
       </p>
     </>
   );
